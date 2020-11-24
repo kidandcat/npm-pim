@@ -19,13 +19,13 @@ func audio() {
 		fmt.Println(err)
 	}
 
-	for {
-		c, err := oto.NewContext(d.SampleRate(), 2, 2, 8192)
-		if err != nil {
-			fmt.Println(err)
-		}
-		defer c.Close()
+	c, err := oto.NewContext(d.SampleRate(), 2, 2, 8192)
+	if err != nil {
+		fmt.Println(err)
+	}
+	defer c.Close()
 
+	for {
 		p := c.NewPlayer()
 		defer p.Close()
 
