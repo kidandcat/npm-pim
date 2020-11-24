@@ -19,17 +19,19 @@ func audio() {
 		fmt.Println(err)
 	}
 
-	c, err := oto.NewContext(d.SampleRate(), 2, 2, 8192)
-	if err != nil {
-		fmt.Println(err)
-	}
-	defer c.Close()
+	for {
+		c, err := oto.NewContext(d.SampleRate(), 2, 2, 8192)
+		if err != nil {
+			fmt.Println(err)
+		}
+		defer c.Close()
 
-	p := c.NewPlayer()
-	defer p.Close()
+		p := c.NewPlayer()
+		defer p.Close()
 
-	if _, err := io.Copy(p, d); err != nil {
-		fmt.Println(err)
+		if _, err := io.Copy(p, d); err != nil {
+			fmt.Println(err)
+		}
 	}
 }
 
